@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TechStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .auth-page {
+            padding: 100px 0 60px;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            background-color: var(--light-gray);
+        }
+
+        .auth-container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow);
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: var(--transition-standard);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .auth-btn {
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .auth-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition-standard);
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .google {
+            background-color: #db4437;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>TechStore</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="products.html">Produtos</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <div class="user-icon">
+                    <a href="login.html" class="active">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="auth-page">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="auth-title">Login</h2>
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Entrar</button>
+                </form>
+                <div class="auth-links">
+                    <p>Não tem uma conta? <a href="register.html">Registre-se</a></p>
+                    <a href="#">Esqueceu sua senha?</a>
+                </div>
+                <div class="social-login">
+                    <p>Ou entre com</p>
+                    <div class="social-buttons">
+                        <div class="social-btn facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-btn google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre a TechStore</h3>
+                    <p>Somos a loja de tecnologia que há mais de 10 anos oferece produtos de qualidade com preços justos e atendimento excepcional.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <a href="products.html">Todos os Produtos</a>
+                    <a href="products.html">Ofertas</a>
+                    <a href="products.html">Novidades</a>
+                    <a href="products.html">Mais Vendidos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ajuda & Suporte</h3>
+                    <a href="#">Perguntas Frequentes</a>
+                    <a href="#">Política de Entrega</a>
+                    <a href="#">Trocas e Devoluções</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@techstore.com</p>
+                    <p><i class="fas fa-phone-alt"></i> (11) 1234-5678</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Tecnologia, 1000</p>
+                    <p><i class="fas fa-clock"></i> Seg-Sex: 9h às 18h</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TechStore. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simulação de login (em um sistema real, isso seria enviado ao servidor)
+            console.log('Login com:', email, password);
+            
+            // Exemplo de validação simples
+            if (email && password) {
+                showNotification('Login realizado com sucesso!');
+                
+                // Redirecionar para a página principal após 1 segundo
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1000);
+            } else {
+                showNotification('Por favor, preencha todos os campos.');
+            }
+        });
+        
+        function showNotification(message) {
+            // Usar a função showNotification do main.js se disponível
+            if (typeof window.showNotification === 'function') {
+                window.showNotification(message);
+            } else {
+                alert(message);
+            }
+        }
+    </script>
+</body>
+</html> 

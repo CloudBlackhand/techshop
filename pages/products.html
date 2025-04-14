@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - TechStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .products-page {
+            padding: 100px 0 60px;
+        }
+        
+        .page-header {
+            background-color: var(--white);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .breadcrumb li {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .breadcrumb li:not(:last-child)::after {
+            content: '/';
+            margin: 0 8px;
+            color: #ddd;
+        }
+        
+        .breadcrumb a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+        
+        .filter-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-title i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        
+        .filter-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+        
+        .price-inputs {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .price-input {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .price-separator {
+            margin: 0 10px;
+            color: var(--text-light);
+        }
+        
+        .checkbox-group {
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 8px;
+        }
+        
+        .rating-filter {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .rating-filter i {
+            color: #ffc107;
+            margin-right: 3px;
+        }
+        
+        .rating-filter span {
+            margin-left: 5px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .filters {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-options {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .filter-options > div {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-label {
+            margin-right: 10px;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .sort-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .sort-btn {
+            padding: 8px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        .sort-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .filter-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>TechStore</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Produtos</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <div class="user-icon">
+                    <a href="login.html">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../index.html">Home</a></li>
+                <li>Produtos</li>
+            </ul>
+            <h1 class="page-title">Todos os Produtos</h1>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products-page">
+        <div class="container">
+            <div class="filter-container">
+                <!-- Sidebar Filters -->
+                <div class="sidebar">
+                    <h3 class="sidebar-title"><i class="fas fa-filter"></i> Filtros</h3>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Preço</h4>
+                        <div class="price-inputs">
+                            <input type="text" class="price-input" placeholder="Min">
+                            <span class="price-separator">-</span>
+                            <input type="text" class="price-input" placeholder="Max">
+                        </div>
+                        <button class="btn btn-primary btn-sm">Aplicar</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Categorias</h4>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" checked> Smartphones
+                            </label>
+                            <label>
+                                <input type="checkbox"> Notebooks
+                            </label>
+                            <label>
+                                <input type="checkbox" id="accessories-checkbox"> Acessórios
+                            </label>
+                            <label>
+                                <input type="checkbox"> Tablets
+                            </label>
+                            <label>
+                                <input type="checkbox"> Smartwatches
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <div class="filter-group-title">Avaliação</div>
+                        <div class="rating-filter">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(5)</span>
+                        </div>
+                        <div class="rating-filter">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>& acima (4+)</span>
+                        </div>
+                        <div class="rating-filter">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>& acima (3+)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Products Area -->
+                <div class="main-content">
+                    <div class="filters">
+                        <div class="filter-options">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Pesquisar produtos..." id="searchInput">
+                            </div>
+                            
+                            <div>
+                                <span class="filter-label">Ordenar por:</span>
+                                <div class="sort-options">
+                                    <button class="sort-btn active" data-sort="default">Relevância</button>
+                                    <button class="sort-btn" data-sort="price-asc">Menor Preço</button>
+                                    <button class="sort-btn" data-sort="price-desc">Maior Preço</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid" id="products-grid">
+                        <!-- Products will be loaded here via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre a TechStore</h3>
+                    <p>Somos a loja de tecnologia que há mais de 10 anos oferece produtos de qualidade com preços justos e atendimento excepcional.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <a href="products.html">Todos os Produtos</a>
+                    <a href="products.html">Ofertas</a>
+                    <a href="products.html">Novidades</a>
+                    <a href="products.html">Mais Vendidos</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ajuda & Suporte</h3>
+                    <a href="#">Perguntas Frequentes</a>
+                    <a href="#">Política de Entrega</a>
+                    <a href="#">Trocas e Devoluções</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@techstore.com</p>
+                    <p><i class="fas fa-phone-alt"></i> (11) 1234-5678</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Tecnologia, 1000</p>
+                    <p><i class="fas fa-clock"></i> Seg-Sex: 9h às 18h</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TechStore. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Filter and sort functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const productsGrid = document.getElementById('products-grid');
+
+            let currentSort = 'default';
+            let searchTerm = '';
+
+            function filterAndSortProducts() {
+                let filteredProducts = [...products];
+
+                // Apply search filter
+                if (searchTerm) {
+                    filteredProducts = filteredProducts.filter(product =>
+                        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
+                // Apply sorting
+                if (currentSort === 'price-asc') {
+                    filteredProducts.sort((a, b) => calculateDiscountPrice(a.price) - calculateDiscountPrice(b.price));
+                } else if (currentSort === 'price-desc') {
+                    filteredProducts.sort((a, b) => calculateDiscountPrice(b.price) - calculateDiscountPrice(a.price));
+                }
+
+                // Display products
+                productsGrid.innerHTML = filteredProducts.map((product, index) => 
+                    createProductCard(product, index)
+                ).join('');
+            }
+
+            // Search input handler
+            searchInput.addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                filterAndSortProducts();
+            });
+
+            // Sort button handlers
+            sortButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentSort = button.dataset.sort;
+                    filterAndSortProducts();
+                });
+            });
+
+            // Initial display
+            filterAndSortProducts();
+        });
+    </script>
+</body>
+</html> 
